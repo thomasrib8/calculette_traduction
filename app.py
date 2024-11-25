@@ -58,9 +58,12 @@ def calculate_translation_cost(words, characters, translation_time_min):
 
 
 def calculate_review_cost(words, reviewer_choice):
-    if reviewer_choice == "TOBY":
-        return words * 0.0069
-    elif reviewer_choice == "TOBY+MIKE":
+    """
+    Calculate review cost based on the reviewer choice.
+    - TOBY or TOBY+MIKE: $0.0069 per word
+    - MIKE: $0 (no review cost)
+    """
+    if reviewer_choice in ["TOBY", "TOBY+MIKE"]:
         return words * 0.0069
     elif reviewer_choice == "MIKE":
         return 0
@@ -112,7 +115,7 @@ def index():
         translation_time, translation_time_sec = calculate_translation_time(words, paragraphs, group_size)
         translation_time_min = translation_time_sec / 60
         translation_cost = calculate_translation_cost(words, characters, translation_time_min)
-        review_cost = calculate_review_cost(pages, reviewer_choice)
+        review_cost = calculate_review_cost(words, reviewer_choice)
         total_cost = translation_cost + review_cost
 
         return render_template('result.html', words=words, characters=characters, pages=pages,
