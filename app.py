@@ -64,7 +64,7 @@ def calculate_review_cost(words, reviewer_choice):
     - MIKE: $0 (no review cost)
     """
     if reviewer_choice in ["TOBY", "TOBY+MIKE"]:
-        return words * 0.0069
+        return words * 0.024
     elif reviewer_choice == "MIKE":
         return 0
     else:
